@@ -343,7 +343,7 @@ document.addEventListener('DOMContentLoaded', () => {
             trendIcon.classList.add('fa-arrow-down');
             trendIndicator.classList.add('trend-down');
         } else {
-            trendIcon.classList.add('fa-minus');
+            trendIcon.classList.add('fa-chart-line');
             trendIndicator.classList.add('trend-stable');
         }
 
@@ -383,7 +383,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 iconHtml = '<i class="fa-solid fa-arrow-down"></i>';
             } else {
                 trendDiv.classList.add('trend-stable');
-                iconHtml = '<i class="fa-solid fa-minus"></i>';
+                iconHtml = '<i class="fa-solid fa-chart-line"></i>';
             }
             trendDiv.innerHTML = `${iconHtml} <span>${crop.market_percent}%</span>`;
 

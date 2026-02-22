@@ -936,7 +936,7 @@ input:checked+.slider:before {
 
 .info-box {
     margin-top: 10px;
-    padding: 30px 15px;
+    padding: 17px 15px;
     background-color: #f1f8e9;
     border-radius: 12px;
     border-left: 4px solid var(--accent-green);
@@ -947,6 +947,13 @@ input:checked+.slider:before {
 
 .info-box strong {
     color: var(--sidebar-bg);
+}
+
+.iconumstable{
+    color:#f69b3a;
+}
+.iconup{
+    color:#21b93f;
 }
 
 #btnAcknowledge{
