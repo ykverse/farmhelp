@@ -459,7 +459,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (animationPhase === 3) {
                 loadingText.textContent = "Fetching market price trends...";
             }
-        }, 800);
+        }, 300);
 
         try {
             // Fetch default inference logic from server
@@ -490,7 +490,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 modalLoading.classList.add('hidden');
                 modalResult.classList.remove('hidden');
                 modal.querySelector('.modal-content').classList.add('result-active');
-            }, 3000); // Give the animation some time to play out cleanly
+            }, 1000); // Give the animation some time to play out cleanly
 
         } catch (error) {
             console.error('Error in prediction API:', error);
