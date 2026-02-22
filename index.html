@@ -251,7 +251,7 @@
 
             <!-- Result State -->
             <div id="modalResult" class="modal-state hidden" style="width: 100%;">
-                <button class="modal-close" id="closeModal"><i class="fa-solid fa-xmark"></i></button>
+
                 <h3>Prediction Results</h3>
 
                 <!-- Toggle Switch -->
@@ -314,17 +314,20 @@
                                 <strong>Market Trend:</strong> The projected price trajectory.<br>
                                 <strong>Suitability Score:</strong> The calculated Market Profit adjusted ranking.
                             </div>
+
+                            <!-- Moved Action Button here -->
+                            <div style="display: flex; justify-content: center; width: 100%;">
+                                <button class="btn-run full-width mt-15" id="btnAcknowledge"
+                                    style="max-width: 250px; margin-top: 15px;">Close</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <button class="btn-run full-width mt-15" id="btnAcknowledge"
-                    style="max-width: 400px; margin-top: 25px;">Close</button>
             </div>
 
             <!-- Error State -->
             <div id="modalError" class="modal-state hidden">
-                <button class="modal-close" id="closeErrorModal"><i class="fa-solid fa-xmark"></i></button>
+
                 <div class="crop-icon-wrapper error-icon mt-15">
                     <i class="fa-solid fa-triangle-exclamation"></i>
                 </div>

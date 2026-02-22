@@ -645,11 +645,15 @@ body {
     border-radius: 24px;
     width: 95%;
     max-width: 1000px;
-    padding: 30px;
+    padding: 20px 30px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
     position: relative;
     transform: translateY(0);
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal-content.result-active {
+    height: 660px;
 }
 
 .modal-overlay.hidden .modal-content {
@@ -699,6 +703,26 @@ body {
     color: #666;
 }
 
+/* Pulsing Text Effect for Loading State */
+.pulsing-text {
+    animation: pulseText 1.5s infinite running;
+}
+
+@keyframes pulseText {
+    0% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+        color: var(--sidebar-bg);
+    }
+
+    100% {
+        opacity: 0.6;
+    }
+}
+
 /* Result Screen */
 .modal-close {
     position: absolute;
@@ -722,7 +746,7 @@ body {
     flex-direction: row;
     gap: 30px;
     width: 100%;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .modal-left-col {
@@ -741,9 +765,9 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
     background: #f8f9fa;
-    padding: 20px;
+    padding: 15px;
     border-radius: 16px;
     width: 100%;
     margin: 0;
@@ -754,7 +778,7 @@ body {
 
 .crop-result-image {
     width: 100%;
-    height: 220px;
+    height: 235px;
     object-fit: cover;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -807,7 +831,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     background: #f8f9fa;
     padding: 10px 20px;
     border-radius: 30px;
@@ -911,18 +935,22 @@ input:checked+.slider:before {
 }
 
 .info-box {
-    margin-top: 20px;
-    padding: 15px;
+    margin-top: 10px;
+    padding: 30px 15px;
     background-color: #f1f8e9;
     border-radius: 12px;
     border-left: 4px solid var(--accent-green);
-    font-size: 13px;
-    line-height: 1.5;
+    font-size: 12px;
+    line-height: 1.4;
     color: #555;
 }
 
 .info-box strong {
     color: var(--sidebar-bg);
+}
+
+#btnAcknowledge{
+    width: 175px;
 }
 
 .runner-up-section h4 {
@@ -947,7 +975,7 @@ input:checked+.slider:before {
     justify-content: space-between;
     align-items: center;
     background: #f8f9fa;
-    padding: 12px 15px;
+    padding: 10px 15px;
     border-radius: 12px;
     transition: transform 0.2s;
 }

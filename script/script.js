@@ -253,7 +253,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('predictionModal');
     const modalLoading = document.getElementById('modalLoading');
     const modalResult = document.getElementById('modalResult');
-    const btnClose = document.getElementById('closeModal');
     const btnAcknowledge = document.getElementById('btnAcknowledge');
 
     // Result DOM Nodes
@@ -279,21 +278,21 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             modalLoading.classList.remove('hidden');
             modalResult.classList.add('hidden');
+            modal.querySelector('.modal-content').classList.remove('result-active');
         }, 300); // Wait for transition
     }
 
-    btnClose.addEventListener('click', closeModal);
     btnAcknowledge.addEventListener('click', closeModal);
 
     let currentPredictionData = [];
 
     // Crop Information Dictionary mapping names to images and descriptions
     const CROP_INFO = {
-        "pepper": { img: "images/pepper.png", desc: "A perennial climbing vine valued for its spice. Thrives in humid, tropical climates with high annual rainfall." },
-        "coffee": { img: "images/coffee.png", desc: "A major plantation crop primarily comprising Robusta and Arabica varieties. Requires elevation between 700m–1200m." },
-        "banana": { img: "images/banana.png", desc: "A fast-growing herbaceous plant. Requires deep, well-drained loamy soil and significant water intake." },
-        "ginger": { img: "images/ginger.png", desc: "A herbaceous perennial grown for its edible rhizome. Prefers well-drained sandy or lateritic loam." },
-        "tapioca": { img: "images/tapioca.png", desc: "A hardy tuberous root crop. Extremely resilient and drought-tolerant; thrives in laterite soils." }
+        "pepper": { img: "images/pepper.png", desc: "A perennial climbing vine valued for its spice. It is typically grown on 'standards' or support trees like Silver Oak or Erythrina.<br> <b>Growing Conditions:</b> Thrives in humid, tropical climates with high annual rainfall and partial shade. Requires soil rich in organic matter.<br> <b>Harvest:</b> Typically occurs between January and March." },
+        "coffee": { img: "images/coffee.png", desc: "A major plantation crop primarily comprising Robusta and Arabica varieties.<br> <b>Growing Conditions:</b> Requires elevation between 700m–1200m, well-aerated soil, and a temperate to tropical climate with distinct wet and dry seasons.<br> <b>Harvest:</b> Typically occurs between November and February." },
+        "banana": { img: "images/banana.png", desc: "A fast-growing herbaceous plant widely cultivated for its nutritious fruit.<br> <b>Growing Conditions:</b> Requires deep, well-drained loamy soil, significant water intake, and a warm, humid tropical climate.<br> <b>Harvest:</b> Can be harvested year-round, typically 9 to 12 months after planting." },
+        "ginger": { img: "images/ginger.png", desc: "A herbaceous perennial grown for its versatile, pungent, and edible aromatic rhizome.<br> <b>Growing Conditions:</b> Prefers well-drained sandy or lateritic loam, moderate rainfall, and a warm, humid climate with partial shade.<br> <b>Harvest:</b> Typically occurs between December and February, about 8 to 10 months after planting." },
+        "tapioca": { img: "images/tapioca.png", desc: "A hardy drought-tolerant tuberous root crop that serves as a staple food source.<br> <b>Growing Conditions:</b> Extremely resilient and thrives in laterite soils with minimal care under tropical and subtropical climates.<br> <b>Harvest:</b> Typically occurs between 9 and 12 months after planting." }
     };
 
     /**
@@ -328,10 +327,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Setup Image & Description
         if (CROP_INFO[cropKey]) {
             resultCropImage.src = CROP_INFO[cropKey].img;
-            resultDescription.textContent = CROP_INFO[cropKey].desc;
+            resultDescription.innerHTML = CROP_INFO[cropKey].desc;
         } else {
             resultCropImage.src = "images/tapioca.png"; // Fallback
-            resultDescription.textContent = "Recommended strictly based on machine learning probability distributions.";
+            resultDescription.innerHTML = "Recommended strictly based on machine learning probability distributions.";
         }
 
         // Setup Trend Indicators for Primary Top Crop
@@ -439,6 +438,28 @@ document.addEventListener('DOMContentLoaded', () => {
         modalResult.classList.add('hidden');
         modalLoading.classList.remove('hidden');
         modal.classList.remove('hidden');
+        modal.querySelector('.modal-content').classList.remove('result-active');
+
+        // New animated loading sequence
+        const loadingText = modalLoading.querySelector('p');
+        const loadingHeading = modalLoading.querySelector('h3');
+
+        loadingText.classList.add('pulsing-text');
+
+        loadingHeading.textContent = "Processing Soil & Market Data";
+        loadingText.textContent = "Thinking...";
+
+        let animationPhase = 0;
+        const animationInterval = setInterval(() => {
+            animationPhase++;
+            if (animationPhase === 1) {
+                loadingText.textContent = "Analyzing inputs...";
+            } else if (animationPhase === 2) {
+                loadingText.textContent = "Running Random Forest model...";
+            } else if (animationPhase === 3) {
+                loadingText.textContent = "Fetching market price trends...";
+            }
+        }, 800);
 
         try {
             // Fetch default inference logic from server
@@ -465,15 +486,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Hide Loading, Show Result
             setTimeout(() => {
+                clearInterval(animationInterval);
                 modalLoading.classList.add('hidden');
                 modalResult.classList.remove('hidden');
-            }, 800);
+                modal.querySelector('.modal-content').classList.add('result-active');
+            }, 3000); // Give the animation some time to play out cleanly
 
         } catch (error) {
             console.error('Error in prediction API:', error);
 
             // Show Error Modal State instead of alert()
             setTimeout(() => {
+                clearInterval(animationInterval);
                 modalLoading.classList.add('hidden');
                 modalResult.classList.add('hidden');
 
@@ -488,19 +512,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Handle closing from the new Error state
-    const btnCloseError = document.getElementById('closeErrorModal');
     const btnAckError = document.getElementById('btnAcknowledgeError');
-
-    // Ensure nodes exist before binding to prevent errors on older layouts
-    if (btnCloseError) {
-        btnCloseError.addEventListener('click', () => {
-            modal.classList.add('hidden');
-            setTimeout(() => {
-                document.getElementById('modalError').classList.add('hidden');
-                modalLoading.classList.remove('hidden'); // Reset for next run
-            }, 300);
-        });
-    }
 
     if (btnAckError) {
         btnAckError.addEventListener('click', () => {
@@ -508,6 +520,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 document.getElementById('modalError').classList.add('hidden');
                 modalLoading.classList.remove('hidden'); // Reset for next run
+                modal.querySelector('.modal-content').classList.remove('result-active');
             }, 300);
         });
     }
