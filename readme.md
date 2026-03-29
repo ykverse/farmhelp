@@ -10,11 +10,13 @@ Enter your soil parameters, get a ranked list of crops sorted by both how well t
 
 ## Screenshots
 
-> _Add your screenshots here_
 
-| Dashboard | Results — Soil Match | Results — Market Profit |
-|---|---|---|
-| ![dashboard](images/screenshots/dashboard.png) | ![soil](images/screenshots/soilresult.png) | ![market](images/screenshots/marketresult.png) |
+
+
+
+![dashboard](images/screenshots/dashboard.png) 
+![soil](images/screenshots/soilresult.png) 
+![market](images/screenshots/marketresult.png) 
 
 ---
 
