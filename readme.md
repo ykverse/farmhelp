@@ -4,8 +4,10 @@ A web app that helps farmers in **Wayanad, Kerala** decide what to grow — by c
 
 Enter your soil parameters, get a ranked list of crops sorted by both how well they grow in your soil *and* whether prices are trending up or down over the next few months.
 
+**Frontend Deployment** : https://agrisense-gamma.vercel.app
+
 > Final year BSc CS project at NMSM Govt. College Kalpetta · University of Calicut · 2026
-> Frontend Deployment : https://agrisense-gamma.vercel.app
+
 
 ---
 
