@@ -10,13 +10,11 @@ Enter your soil parameters, get a ranked list of crops sorted by both how well t
 
 ## Screenshots
 
+> _Add your screenshots here_
 
-
-
-
-![dashboard](images/screenshots/dashboard.png) 
-![soil](images/screenshots/soilresult.png) 
-![market](images/screenshots/marketresult.png) 
+| Dashboard | Results — Soil Match | Results — Market Profit |
+|---|---|---|
+| ![dashboard](images/screenshots/dashboard.png) | ![soil](images/screenshots/soilresult.png) | ![market](images/screenshots/marketresult.png) |
 
 ---
 
@@ -133,4 +131,5 @@ Pull requests are welcome. For major changes, open an issue first.
 3. Commit your changes (`git commit -m 'add your feature'`)
 4. Push to the branch (`git push origin feature/your-feature`)
 5. Open a Pull Request
+
 
